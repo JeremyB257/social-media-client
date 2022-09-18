@@ -16,7 +16,6 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // trend
 export const GET_TRENDS = 'GET_TRENDS';
-
 //errors
 export const GET_POST_ERRORS = 'GET_POST_ERRORS';
 
