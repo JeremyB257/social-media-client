@@ -18,7 +18,7 @@ const App = () => {
       await axios({
         method: 'get',
         url: `${process.env.REACT_APP_PUBLIC_URL}jwtid`,
-        withCredentials: true,
+        headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       })
         .then((res) => {
           setUid(res.data);

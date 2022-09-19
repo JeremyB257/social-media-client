@@ -8,8 +8,11 @@ export const GET_USER_ERRORS = 'GET_USER_ERRORS';
 
 export const getUser = (uid) => {
   return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_PUBLIC_URL}api/user/${uid}`)
+    return axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_PUBLIC_URL}api/user/${uid}`,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
+    })
       .then((res) => {
         dispatch({ type: GET_USER, payload: res.data });
       })
@@ -22,7 +25,7 @@ export const uploadPicture = (data, id) => {
     return axios({
       method: 'post',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/user/upload/${id}`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data,
     })
       .then((res) => {
@@ -48,7 +51,7 @@ export const updateBio = (userId, bio) => {
     return axios({
       method: 'put',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/user/${userId}`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { bio },
     })
       .then((res) => {

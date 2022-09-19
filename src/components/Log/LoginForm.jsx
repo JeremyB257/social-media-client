@@ -12,13 +12,13 @@ const LoginForm = () => {
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/user/login`,
-      withCredentials: true,
       data: {
         email,
         password,
       },
     })
       .then((res) => {
+        window.localStorage.setItem('jwt', res.data.token);
         window.location = '/home';
       })
       .catch((err) => {

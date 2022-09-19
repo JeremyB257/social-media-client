@@ -15,7 +15,6 @@ const SignUpForm = () => {
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/user/register`,
-      withCredentials: true,
       data: {
         pseudo,
         email,

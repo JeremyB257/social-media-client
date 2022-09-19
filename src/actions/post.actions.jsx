@@ -16,13 +16,16 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // trend
 export const GET_TRENDS = 'GET_TRENDS';
+
 //errors
 export const GET_POST_ERRORS = 'GET_POST_ERRORS';
 
 export const getPosts = (num) => {
   return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_PUBLIC_URL}api/post`)
+    return axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_PUBLIC_URL}api/post`,
+    })
       .then((res) => {
         const array = res.data.slice(0, num);
         dispatch({ type: GET_POSTS, payload: array });
@@ -37,7 +40,7 @@ export const addPost = (data) => {
     return axios({
       method: 'post',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: data,
     })
       .then((res) => {
@@ -61,7 +64,7 @@ export const likePost = (postId, userId) => {
     return axios({
       method: 'patch',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}/like`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { id: userId, like: 1 },
     })
       .then((res) => {
@@ -76,7 +79,7 @@ export const unLikePost = (postId, userId) => {
     return axios({
       method: 'patch',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}/like`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { id: userId, like: 0 },
     })
       .then((res) => {
@@ -91,7 +94,7 @@ export const updatePost = (postId, message, access) => {
     return axios({
       method: 'put',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { message, access },
     })
       .then((res) => {
@@ -106,7 +109,7 @@ export const deletePost = (postId, access) => {
     return axios({
       method: 'delete',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { access },
     })
       .then((res) => {
@@ -123,7 +126,7 @@ export const addComment = (postId, commenterId, text, commenterPseudo) => {
     return axios({
       method: 'patch',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}/comment-post`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { commenterId, text, commenterPseudo },
     })
       .then((res) => {
@@ -138,7 +141,7 @@ export const editComment = (postId, commentId, text, access) => {
     return axios({
       method: 'patch',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}/edit-comment-post`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { commentId, text, access },
     })
       .then((res) => {
@@ -153,7 +156,7 @@ export const deleteComment = (postId, commentId, access) => {
     return axios({
       method: 'patch',
       url: `${process.env.REACT_APP_PUBLIC_URL}api/post/${postId}/delete-comment-post`,
-      withCredentials: true,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       data: { commentId, access },
     })
       .then((res) => {
