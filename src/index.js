@@ -11,9 +11,8 @@ import { getPosts } from './actions/post.actions';
 
 //dev tools
 import { composeWithDevTools } from 'redux-devtools-extension';
-import logger from 'redux-logger';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 store.dispatch(getUsers());
 store.dispatch(getPosts());
